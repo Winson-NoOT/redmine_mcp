@@ -1,6 +1,8 @@
 class McpOauthClient < ActiveRecord::Base
   validates :client_id, presence: true, uniqueness: true
 
+  after_initialize :set_defaults, if: :new_record?
+
   def redirect_uris
     JSON.parse(redirect_uris_json)
   rescue
@@ -30,6 +32,16 @@ class McpOauthClient < ActiveRecord::Base
   def response_types=(arr)
     self.response_types_json = arr.to_json
   end
+
+  private
+
+  def set_defaults
+    self.redirect_uris_json  ||= '[]'
+    self.grant_types_json    ||= '["authorization_code"]'
+    self.response_types_json ||= '["code"]'
+  end
+
+  public
 
   def to_registration_response
     {
