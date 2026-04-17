@@ -23,6 +23,8 @@ if [ -n "$LEFTHOOK_URL" ]; then
 fi
 
 # Setup Redmine versions
+mkdir -p "${REDMINE_HOME}"
+
 for VERSION in 5.1 6.0 6.1; do
     TARGET="${REDMINE_HOME}/${VERSION}"
 

@@ -8,7 +8,7 @@
     "containerEnv": {
         "PLUGIN_NAME": "redmine_mcp",
         "RAILS_ENV": "test",
-        "REDMINE_HOME": "/usr/src/redmine"
+        "REDMINE_HOME": "/home/vscode/redmine"
     },
     "onCreateCommand": "/bin/bash ${containerWorkspaceFolder}/.devcontainer/on-create.sh",
     "postCreateCommand": "/bin/bash ${containerWorkspaceFolder}/.devcontainer/post-create.sh",
