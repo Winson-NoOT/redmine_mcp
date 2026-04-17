@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # Install system packages
-apt-get update
-apt-get install -y imagemagick npm shellcheck zstd
+sudo apt-get update
+sudo apt-get install -y imagemagick npm shellcheck zstd
 
 mkdir -p ~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
