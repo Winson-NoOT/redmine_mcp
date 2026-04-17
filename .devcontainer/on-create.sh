@@ -8,15 +8,19 @@ sudo apt-get install -y imagemagick npm shellcheck zstd
 mkdir -p ~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
 
-# Install actionlint
-curl -sL "$(curl -s https://api.github.com/repos/rhysd/actionlint/releases/latest | \
-    grep -o 'https://github.com/[^"]*linux_amd64.tar.gz')" | \
-    tar xz -C ~/.local/bin/ actionlint
+# Install actionlint (optional - skip if download fails)
+ACTIONLINT_URL=$(curl -sf https://api.github.com/repos/rhysd/actionlint/releases/latest | \
+    grep -o 'https://github.com/[^"]*linux_amd64.tar.gz' || true)
+if [ -n "$ACTIONLINT_URL" ]; then
+    curl -sL "$ACTIONLINT_URL" | tar xz -C ~/.local/bin/ actionlint || true
+fi
 
-# Install lefthook
-curl -sL "$(curl -s https://api.github.com/repos/evilmartians/lefthook/releases/latest | \
-    grep -o 'https://github.com/[^"]*Linux_x86_64.tar.gz')" | \
-    tar xz -C ~/.local/bin/ lefthook
+# Install lefthook (optional - skip if download fails)
+LEFTHOOK_URL=$(curl -sf https://api.github.com/repos/evilmartians/lefthook/releases/latest | \
+    grep -o 'https://github.com/[^"]*Linux_x86_64.tar.gz' || true)
+if [ -n "$LEFTHOOK_URL" ]; then
+    curl -sL "$LEFTHOOK_URL" | tar xz -C ~/.local/bin/ lefthook || true
+fi
 
 # Setup Redmine versions
 for VERSION in 5.1 6.0 6.1; do
